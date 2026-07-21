@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Distribuição de naufrágios encontrados ao redor da Irlanda</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="eyebrow">Inventário de Naufrágios na Irlanda &nbsp;·&nbsp; Visualização Interativa 2</div>
+    <h1>Distribuição de naufrágios encontrados ao redor da Irlanda</h1>
+    <p class="lede">Cada ponto marca a coordenada registrada de um naufrágio ao largo da costa irlandesa. Filtre por tipo de embarcação e por período no painel ao lado, e clique num ponto para ler os detalhes do evento.</p>
+  </div>
+
+  <div class="stage">
+    <div class="panel">
+      <h2>Tipo de embarcação</h2>
+      <div class="sub">Apenas pontos com coordenada registrada (3.564 de 17.981 naufrágios). Clique para incluir/excluir um tipo.</div>
+      <div class="chiplist" id="chipList"></div>
+      <div class="panel-actions">
+        <button class="btn" id="allBtn">Todos</button>
+        <button class="btn" id="noneBtn">Nenhum</button>
+      </div>
+
+      <div class="yearblock">
+        <label>Período (ano do naufrágio)</label>
+        <div class="yearinputs">
+          <input type="number" id="yearFrom">
+          <span style="color:var(--ink-faint)">–</span>
+          <input type="number" id="yearTo">
+        </div>
+        <input type="range" id="yearFromRange" step="1">
+        <input type="range" id="yearToRange" step="1">
+        <div class="unknownyear">
+          <input type="checkbox" id="includeUnknownYear" checked>
+          <label for="includeUnknownYear" style="margin:0; text-transform:none; letter-spacing:0; font-family:Georgia,serif;">incluir naufrágios sem ano registrado</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mapcard">
+      <div class="chart-head">
+        <span class="t">Pontos plotados</span>
+        <span class="r" id="countLabel"></span>
+      </div>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    <b>Nota de leitura:</b> nem todo naufrágio do inventário possui coordenada — 14.417 registros não têm latitude/longitude conhecidas e por isso não aparecem neste mapa (veja a Visualização 1 para a série completa por ano). Pontos afastados da costa correspondem sobretudo a navios torpedeados ou naufragados em alto mar durante as duas Guerras Mundiais. O contorno geográfico é uma referência simplificada da Irlanda, Reino Unido e França.
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="coastline.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
