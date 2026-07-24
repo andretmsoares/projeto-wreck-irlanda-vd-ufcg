@@ -60,6 +60,10 @@ function buildSeries(){
 function option(){
   return {
     backgroundColor:'transparent',
+    // Full replace on filter (setOption notMerge) re-creates every series.
+    // Enter animation then replays for points that stayed visible (esp. unknown-year),
+    // which looks like dots jumping between locations.
+    animation: false,
     textStyle:{fontFamily:'Georgia, serif'},
     geo:{
       map:'coastline',
@@ -98,6 +102,11 @@ function option(){
 
 function render(){
   const opt = option();
+  const prev = chart.getOption();
+  if (prev && prev.geo && prev.geo[0]) {
+    if (prev.geo[0].center) opt.geo.center = prev.geo[0].center;
+    if (prev.geo[0].zoom != null) opt.geo.zoom = prev.geo[0].zoom;
+  }
   chart.setOption(opt, true);
   updateCountLabel();
 }
